@@ -1,0 +1,75 @@
+﻿<Window x:Class="AlgorithmBinanceFutures.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AlgorithmBinanceFutures"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="608.268" Width="1282.024">
+    <Grid Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="869*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="error_log" HorizontalAlignment="Left" Margin="48,407,0,45" TextWrapping="Wrap" Width="410"/>
+        <Button Content="Clear errors" HorizontalAlignment="Left" Margin="48,376,0,0" VerticalAlignment="Top" Width="75" Click="Button_ClearErrors"/>
+        <ListView Margin="481,48,10,45" x:Name="HistoryList" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Symbol}" Width="100" >Symbol</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Balance}" Width="70">Balance</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PriceUp}" Width="70">PriceUp</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PriceDown}" Width="70">PriceDown</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=BetUp}" Width="70">BetUp</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=BetDown}" Width="70">BetDown</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Indefined}" Width="70">Indefined</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=WinUp}" Width="70">WinUp</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=WinDown}" Width="70">WinDown</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=WinLoss}" Width="80">Win/Loss</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="48,79,0,0" VerticalAlignment="Top" Width="74" Height="20" Click="Button_Click" />
+        <ComboBox x:Name="cmbTest" ItemsSource="{Binding CmbContent}" HorizontalAlignment="Left" Margin="48,42,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="cmbTest1" ItemsSource="{Binding cmbContentFileNames}" HorizontalAlignment="Left" Margin="48,10,0,0" VerticalAlignment="Top" Width="344"/>
+        <Label Content="Balance:" HorizontalAlignment="Left" Margin="208,42,0,0" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="balance_full" HorizontalAlignment="Left" Margin="298,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="50"/>
+        <TextBox x:Name="take_profit" HorizontalAlignment="Left" Margin="298,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="50" TextChanged="take_profit_TextChanged" PreviewTextInput="digit_PreviewTextInput"/>
+        <TextBox x:Name="stop_loss" HorizontalAlignment="Left" Margin="298,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="50" TextChanged="stop_loss_TextChanged" PreviewTextInput="digit_PreviewTextInput"/>
+        <Label Content="Take Profit (%)" HorizontalAlignment="Left" Margin="208,81,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.246,0.577"/>
+        <Label Content="Stop Loss (%)" HorizontalAlignment="Left" Margin="208,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.246,0.577"/>
+        <Label Content="USDT:" HorizontalAlignment="Left" Margin="208,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.246,0.577"/>
+        <TextBox x:Name="usdt_bet" HorizontalAlignment="Left" Margin="298,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="50" TextChanged="usdt_bet_TextChanged" PreviewTextInput="digit_PreviewTextInput"/>
+        <Label Content="Win:" HorizontalAlignment="Left" Margin="358,81,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.246,0.577"/>
+        <Label Content="Lose:" HorizontalAlignment="Left" Margin="358,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.246,0.577"/>
+        <TextBlock x:Name="win_bet" HorizontalAlignment="Left" Margin="398,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="60"/>
+        <TextBlock x:Name="lose_bet" HorizontalAlignment="Left" Margin="398,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="60"/>
+        <Button Content="Refile" HorizontalAlignment="Left" Margin="46,275,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_1"/>
+        <Label Content="Klines:" HorizontalAlignment="Left" Margin="131,218,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="234,219,0,0" VerticalAlignment="Top" Height="26" Width="16"/>
+        <TextBox Text="0" x:Name="klines_start" HorizontalAlignment="Left" Margin="196,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="20" TextChanged="klines_start_TextChanged"  PreviewTextInput="digit_PreviewTextInput"/>
+        <TextBox Text="499" x:Name="klines_end" HorizontalAlignment="Left" Margin="256,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="20" TextChanged="klines_end_TextChanged"  PreviewTextInput="digit_PreviewTextInput"/>
+        <Label Content="Start time:" HorizontalAlignment="Left" Margin="208,334,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
+        <DatePicker x:Name="data_picker" HorizontalAlignment="Left" Margin="298,295,0,0" VerticalAlignment="Top" Height="24" Width="100" RenderTransformOrigin="0.33,0.625"/>
+        <Label Content="Date:" HorizontalAlignment="Left" Margin="208,298,0,0" VerticalAlignment="Top" Height="26" Width="60" RenderTransformOrigin="0.15,1.385"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="336,337,0,0" VerticalAlignment="Top" Height="26" Width="16"/>
+        <TextBox Text="0" x:Name="start_time_h" HorizontalAlignment="Left" Margin="298,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="20" PreviewTextInput="digit_PreviewTextInput"/>
+        <TextBox Text="0" x:Name="start_time_m" HorizontalAlignment="Left" Margin="358,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="20" PreviewTextInput="digit_PreviewTextInput"/>
+        <CheckBox IsChecked="True" x:Name="current_time" Content="Current time" HorizontalAlignment="Left" Margin="208,275,0,0" VerticalAlignment="Top"/>
+        <Label Content="End time:" HorizontalAlignment="Left" Margin="208,370,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="336,373,0,0" VerticalAlignment="Top" Height="26" Width="16"/>
+        <TextBox Text="0" x:Name="end_time_h" HorizontalAlignment="Left" Margin="298,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="20" PreviewTextInput="digit_PreviewTextInput"/>
+        <TextBox Text="0" x:Name="end_time_m" HorizontalAlignment="Left" Margin="358,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="20" PreviewTextInput="digit_PreviewTextInput"/>
+        <RadioButton x:Name="StartTime" GroupName="StartEndTime" HorizontalAlignment="Left" Margin="183,340,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="EndTime" GroupName="StartEndTime" IsChecked="True" HorizontalAlignment="Left" Margin="183,376,0,0" VerticalAlignment="Top"/>
+        <Label Content="xMull:" HorizontalAlignment="Left" Margin="48,122,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="x_mull" HorizontalAlignment="Left" Height="23" Margin="131,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <Label Content="xCount:" HorizontalAlignment="Left" Margin="48,166,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="x_count" HorizontalAlignment="Left" Height="23" Margin="131,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox x:Name="api_key" HorizontalAlignment="Left" Height="23" Margin="559,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="secret_key" HorizontalAlignment="Left" Height="23" Margin="831,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" RenderTransformOrigin="1.207,0.696"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="1030,13,0,0" VerticalAlignment="Top" Width="75" Click="Button_Login" />
+        <Label Content="Api Key:" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Secret Key:" HorizontalAlignment="Left" Margin="740,10,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
